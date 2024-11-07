@@ -28,7 +28,7 @@ const MutationObserversDemo = () => {
     const attributeObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         setAttributeChanges(prev => [...prev,
-          `${mutation.attributeName} changed from "${mutation.oldValue}" to "${mutation.target.getAttribute(mutation.attributeName!)}"`
+          `${mutation.attributeName} changed from "${mutation.oldValue}" to "${(mutation.target as Element).getAttribute(mutation.attributeName!)}"`
         ]);
       });
     });
