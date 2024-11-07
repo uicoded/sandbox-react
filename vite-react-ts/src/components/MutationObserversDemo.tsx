@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MutationObserversDemo = () => {
   const charTargetRef = useRef<HTMLDivElement>(null);
@@ -109,6 +110,7 @@ const MutationObserversDemo = () => {
 
   return (
     <div className="mutation-observers-demo">
+      <Link to="/" className="back-button">← Back to Index</Link>
       <h1>MutationObserver Examples</h1>
 
       <section>
