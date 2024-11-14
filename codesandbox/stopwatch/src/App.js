@@ -32,8 +32,8 @@ export default function Stopwatch() {
     // setCummulativeTime(0);
     // handleStart();
     setIsRunning(false);
-    setStartTime(0);
     clearInterval(intervalRef.current);
+    setSecondsPassed(0);
   }
 
   useEffect(() => {
