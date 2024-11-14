@@ -1,22 +1,19 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Stopwatch() {
   const [startTime, setStartTime] = useState(null);
   const [now, setNow] = useState(null);
+  const [secondsPassed, setSecondsPassed] = useState(0);
   // const [cummulativeTime, setCummulativeTime] = useState(0);
   const intervalRef = useRef(null);
   const [isRunning, setIsRunning] = useState(false);
-
-  function handleReset() {
-    // setCummulativeTime(0);
-    // handleStart();
-  }
 
   function handleStart() {
     setStartTime(Date.now());
     setIsRunning(true);
     setNow(Date.now());
 
+    // Clear any existing interval first to prevent multiple intervals
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setNow(Date.now());
@@ -24,16 +21,26 @@ export default function Stopwatch() {
   }
 
   function handleStop() {
+    // Clean up the interval when stopping
     clearInterval(intervalRef.current);
     setIsRunning(false);
     // alert(secondsPassed);
     // setCummulativeTime(Number(secondsPassed));
   }
 
-  let secondsPassed = 0;
-  if (startTime != null && now != null) {
-    secondsPassed = (now - startTime) / 1000;
+  function handleReset() {
+    // setCummulativeTime(0);
+    // handleStart();
+    setIsRunning(false);
+    setStartTime(0);
+    clearInterval(intervalRef.current);
   }
+
+  useEffect(() => {
+    if (startTime != null && now != null) {
+      setSecondsPassed((now - startTime) / 1000);
+    }
+  }, [now, startTime]);
 
   // if (startTime != null && now != null) {
   //   cummulativeTime.current =
@@ -48,6 +55,11 @@ export default function Stopwatch() {
   // if (startTime != null && now != null) {
   //   setCummulativeTime(cummulativeTime + (now - startTime) / 1000);
   // }
+
+  useEffect(() => {
+    // Cleanup function that runs when component unmounts
+    return () => clearInterval(intervalRef.current);
+  }, []); // Empty dependency array means this only runs on mount/unmount
 
   return (
     <>
