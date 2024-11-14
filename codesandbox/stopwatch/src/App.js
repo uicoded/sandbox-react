@@ -7,18 +7,17 @@ export default function Stopwatch() {
   const [isRunning, setIsRunning] = useState(false);
 
   function handleStart() {
-    setStartTime(Date.now());
+    const now = Date.now();
+    setStartTime(now);
     setIsRunning(true);
 
-    // Clear any existing interval first to prevent multiple intervals
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setSecondsPassed((Date.now() - startTime) / 1000);
+      setSecondsPassed((Date.now() - now) / 1000);
     }, 10);
   }
 
   function handleStop() {
-    // Clean up the interval when stopping
     clearInterval(intervalRef.current);
     setIsRunning(false);
   }
