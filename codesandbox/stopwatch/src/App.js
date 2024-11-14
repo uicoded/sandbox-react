@@ -4,6 +4,7 @@ export default function Stopwatch() {
   const [secondsPassed, setSecondsPassed] = useState(0);
   const intervalRef = useRef(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [offset, setOffset] = useState(0);
 
   function handleStart() {
     const now = Date.now();
@@ -11,13 +12,21 @@ export default function Stopwatch() {
 
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setSecondsPassed((Date.now() - now) / 1000);
+      setSecondsPassed(offset + (Date.now() - now) / 1000);
     }, 10);
   }
 
   function handleStop() {
     clearInterval(intervalRef.current);
     setIsRunning(false);
+    setOffset(secondsPassed);
+  }
+
+  function handleReset() {
+    setIsRunning(false);
+    clearInterval(intervalRef.current);
+    setSecondsPassed(0);
+    setOffset(0);
   }
 
   useEffect(() => {
@@ -32,6 +41,7 @@ export default function Stopwatch() {
       ) : (
       <button onClick={handleStart}>Start</button>  
       )}
+      <button onClick={handleReset}>Reset</button>
     </>
   );
 }
