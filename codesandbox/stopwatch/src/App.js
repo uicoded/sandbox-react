@@ -1,14 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Stopwatch() {
-  const [startTime, setStartTime] = useState(Date.now());
   const [secondsPassed, setSecondsPassed] = useState(0);
   const intervalRef = useRef(null);
   const [isRunning, setIsRunning] = useState(false);
 
   function handleStart() {
     const now = Date.now();
-    setStartTime(now);
     setIsRunning(true);
 
     clearInterval(intervalRef.current);
@@ -22,12 +20,6 @@ export default function Stopwatch() {
     setIsRunning(false);
   }
 
-  function handleReset() {
-    setIsRunning(false);
-    clearInterval(intervalRef.current);
-    setSecondsPassed(0);
-  }
-
   useEffect(() => {
     return () => clearInterval(intervalRef.current);
   }, []);
@@ -38,9 +30,8 @@ export default function Stopwatch() {
       {isRunning ? (
         <button onClick={handleStop}>Stop</button>
       ) : (
-        <button onClick={handleStart}>Start</button>
+      <button onClick={handleStart}>Start</button>  
       )}
-      <button onClick={handleReset}>Reset</button>
     </>
   );
 }
