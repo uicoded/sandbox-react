@@ -4,6 +4,9 @@ node_modules
 #Compile
 dist
 
+#Build
+Build
+
 # Cache
 .cache
 .tmp
