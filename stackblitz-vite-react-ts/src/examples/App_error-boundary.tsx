@@ -7,17 +7,26 @@ import {
 
 export default function App() {
 	return (
-		<ErrorBoundary FallbackComponent={ErrorFallback}>
+		<ErrorBoundary 
+      FallbackComponent={ErrorFallback}
+			onReset={(details) => {
+				// Reset the state of your app so the error doesn't happen again
+        // Here just logging the details
+				console.log(details);
+			}}>
 			<OnboardingForm />
 		</ErrorBoundary>
 	)
 }
 
-function ErrorFallback({ error }: FallbackProps) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
 	return (
 		<div role="alert">
 			There was an error:{' '}
 			<pre style={{ color: 'red', whiteSpace: 'normal' }}>{error.message}</pre>
+			{/* Add a "Try again" button. Assign the resetErrorBoundary function to its onClick prop. */}
+			{/* <button onClick={()=>resetErrorBoundary('passing more info')}>Try again</button> */}
+			<button onClick={resetErrorBoundary}>Try again</button>
 		</div>
 	)
 }
