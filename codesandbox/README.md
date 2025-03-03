@@ -1,5 +1,10 @@
 ## Codesandbox
 
+DO NOT USE.  
+Codesanbox is using react-scripts  
+Most modern examples will cause thing to break.  
+Updating proved to be more hassle than benefit.  
+
 ### Background
 
 If you noticed, having each example to have own `package.json` is very expensive
