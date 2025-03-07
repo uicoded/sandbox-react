@@ -8,6 +8,8 @@ import App from './App_default.tsx'
 // import App from './examples/hooks/App_hooks-use-state.tsx'
 // import App from './examples/hooks/App_hooks-use-state-initial-value.tsx'
 // import App from './examples/hooks/App_hooks-use-effect.tsx'
+// import App from './examples/hooks/App_hooks-use-effect-scenarios.tsx'
+// import App from './examples/hooks/App_hooks-use-effect-conditional.tsx'
 // import App from './examples/hooks/App_hooks-use-effect-set-interval.tsx'
 // import App from './examples/styles/App_3-ways-adding-style.tsx'
 // import './examples/styles/App_styled-box.css';
