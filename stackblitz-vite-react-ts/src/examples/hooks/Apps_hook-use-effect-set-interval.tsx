@@ -5,9 +5,10 @@ export default function App() {
 
   useEffect(() => {
     // Effect logic
+    console.log('side-effect called');
     const interval = setInterval(() => setTime(time + 1), 1000);
     return () => {// Cleanup function
-      console.log('cleanup: ', time);
+      console.log('cleanup called: ', time);
       clearInterval(interval);
     }
   }, [time]);
