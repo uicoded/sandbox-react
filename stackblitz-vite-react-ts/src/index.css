@@ -66,3 +66,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* a11y */
+
+/* Focus */
+/* Accessibility focus styles */
+:focus {
+  outline: 3px solid #4d90fe;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.5);
+  transition: outline-color 0.2s ease-in-out;
+}
+
+/* For elements where focus ring might be visually disruptive */
+[tabindex="-1"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ensure focus styles are visible in high contrast mode */
+@media (forced-colors: active) {
+  :focus {
+    outline: 3px solid CanvasText;
+  }
+}
+
+/* Focus styles for interactive elements that maintain their own styling */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #4d90fe;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.5);
+  text-decoration: underline; /* Additional indicator for links */
+}
+/* End of Focus */
+
+/* Testing styles */
+.testBlock {
+  padding: 1em;
+  color: black;
+  background-color: lightcoral;
+  display: inline-block;
+  width: auto;
+  margin: 1em;
+  border: 2px solid red;
+}
+
