@@ -13,6 +13,7 @@ import App from './App_default.tsx'
 // import App from './examples/hooks/use-effect/App_hooks-use-effect-set-interval.tsx'
 // import App from './examples/hooks/use-ref/App_hooks-use-ref-nw.tsx'
 // import App from './examples/hooks/use-ref/App_hooks-use-ref.tsx'
+// import App from './examples/hooks/use-id/App_hooks-use-id.tsx'
 // import App from './examples/styles/App_3-ways-adding-style.tsx'
 // import './examples/styles/App_styled-box.css';
 // import App from './examples/styles/App_styled-box.tsx'
