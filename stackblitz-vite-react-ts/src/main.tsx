@@ -18,6 +18,9 @@ import App from './App_default.tsx'
 // import './examples/styles/App_styled-box.css';
 // import App from './examples/styles/App_styled-box.tsx'
 // import App from './examples/App_using-keys.tsx'
+// import App from './examples/local-storage/App_local-storage-dynamic-value.tsx'
+// import App from './examples/local-storage/App_local-storage-hook.tsx'
+// import App from './examples/local-storage/App_local-storage-immediate-value.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
