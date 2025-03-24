@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react'
+import { useState, Suspense, useEffect } from 'react'
 import examplesData from './examples.json'
 import styled from "styled-components";
 
@@ -80,7 +80,7 @@ type FolderProps = {
   displayName: string
   items: Array<ExampleItem>
   currentExample: string | null
-  onExampleClick: (path: string) => void
+  onExampleClick: (path: string, item: ExampleItem) => void
 }
 
 /**
@@ -103,7 +103,7 @@ const Folder = ({ displayName, items, currentExample, onExampleClick }: FolderPr
               key={path}
               item={item} 
               isActive={currentExample === path}
-              onClick={() => onExampleClick(path)}
+              onClick={() => onExampleClick(path, item)}
             />
           );
         })}
@@ -124,14 +124,34 @@ export default function Examples() {
   const [error, setError] = useState<string | null>(null);
   const { examples } = examplesData;
   
-  const handleExampleClick = (path: string) => {
+  const handleExampleClick = (path: string, item: ExampleItem) => {
     setCurrentExample(path);
     setLoading(true);
     setError(null);
     
+    // Load CSS files if they exist in the paths array
+    if (item.paths) {
+      const cssFiles = item.paths.filter(p => p.endsWith('.css'));
+      cssFiles.forEach(cssPath => {
+        const importPath = cssPath
+          .replace(/^\.\//, '')
+          .replace(/^root\//, '');
+        
+        import(`./examples/${importPath}`)
+          .catch(err => {
+            console.error(`Failed to load CSS: ${cssPath}`, err);
+          });
+      });
+    }
+    
+    // Find the TSX file to load as the component
+    const tsxPath = item.paths ? 
+      item.paths.find(p => p.endsWith('.tsx')) || path : 
+      path;
+    
     // Convert path to a format that can be used with dynamic imports
     // Remove file extension and convert to relative path
-    const importPath = path
+    const importPath = tsxPath
       .replace(/\.tsx$/, '')
       .replace(/^\.\//, '')
       .replace(/^root\//, '');
@@ -143,8 +163,8 @@ export default function Examples() {
         setLoading(false);
       })
       .catch(err => {
-        console.error(`Failed to load example: ${path}`, err);
-        setError(`Failed to load example: ${path}. ${err.message}`);
+        console.error(`Failed to load example: ${tsxPath}`, err);
+        setError(`Failed to load example: ${tsxPath}. ${err.message}`);
         setLoading(false);
       });
   };
@@ -228,6 +248,7 @@ export default function Examples() {
           border: 1px solid #ddd;
           border-radius: 8px;
           background: #f5f5f5;
+          color: black;
         }
         
         .example-content {
