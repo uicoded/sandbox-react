@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from 'react'
+import { useState, Suspense } from 'react'
 import examplesData from './examples.json'
 import styled from "styled-components";
 
